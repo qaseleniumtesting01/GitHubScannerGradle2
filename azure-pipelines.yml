@@ -17,4 +17,11 @@ steps:
 - task: WhiteSource@20
   inputs:
     cwd: '$(System.DefaultWorkingDirectory)'
-    projectName: 'GradleScannerGitHub'
+    configuration: |
+      productName = C2405719
+      projectName = C2405719
+      includes = **/*.java */*.zip
+      resolveAllDependencies = false
+      gradle.resolveDependencies = true
+      gradle.ignoreSourceFiles = true
+      excludeDependenciesFromNodes = .*gravitee.*
