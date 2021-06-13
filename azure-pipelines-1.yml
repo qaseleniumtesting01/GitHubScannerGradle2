@@ -1,0 +1,29 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- task: WhiteSource@20
+  inputs:
+    cwd: '$(System.DefaultWorkingDirectory)'
+    configuration: |
+      wss.url = https://staging.whitesourcesoftware.com/agent
+      apiKey = e9dadf2e723d4b54b4af93f9deeff59066c703d47bef41ae873c50c40aa81aaa
+      productName = C2405719
+      projectName = C2405719
+      offline = true
+      includes = **/*.java */*.zip
+      resolveAllDependencies = false
+      gradle.resolveDependencies = true
+      gradle.ignoreSourceFiles = true
+      excludeDependenciesFromNodes = .*gravitee.*
